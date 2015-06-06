@@ -24,49 +24,70 @@ Korg.prototype.handleMessage = function(delta, raw) {
     return this.emit('scene', msg.scene)
   }
 
-  if (msg.control >= 14 && msg.control <= 22) {
-    n = msg.control - 13
+  if (msg.control >= 16 && msg.control <= 23) {
+    n = msg.control - 15
     return this.emit('knob:'+n, msg.value)
   }
 
-  if (msg.control >= 2 && msg.control <= 13) {
-    n = msg.control - 1
+  if (msg.control >= 0 && msg.control <= 7) {
+    n = msg.control
     return this.emit('slider:'+n, msg.value)
   }
 
-  if (msg.control >= 23 && msg.control <= 31) {
-    n = msg.control - 22
+  if (msg.control >= 32 && msg.control <= 39) {
+    n = msg.control - 31
     return this.emit('button:'+n, msg.value)
   }
 
-  if (msg.control >= 33 && msg.control <= 41) {
-    n = msg.control - 23
+  if (msg.control >= 48 && msg.control <= 55) {
+    n = msg.control - 37
     return this.emit('button:'+n, msg.value)
   }
 
-  if (msg.control === 47) {
+  if (msg.control >= 64 && msg.control <= 71) {
+    n = msg.control - 43
+    return this.emit('button:'+n, msg.value)
+  }
+
+
+
+  if (msg.control === 41) {
+      return this.emit('button:play', msg.value)
+  }
+  if (msg.control === 42) {
+    return this.emit('button:stop', msg.value)
+  }
+  if (msg.control === 43) {
     return this.emit('button:prev', msg.value)
   }
 
-  if (msg.control === 45) {
-    return this.emit('button:play', msg.value)
-  }
-
-  if (msg.control === 48) {
+  if (msg.control === 44) {
     return this.emit('button:next', msg.value)
   }
 
-  if (msg.control === 49) {
-    return this.emit('button:loop', msg.value)
-  }
-
-  if (msg.control === 46) {
-    return this.emit('button:stop', msg.value)
-  }
-
-  if (msg.control === 44) {
+  if (msg.control === 45) {
     return this.emit('button:record', msg.value)
   }
+  if (msg.control === 46) {
+    return this.emit('button:cycle', msg.value)
+  }
+  if (msg.control === 58) {
+    return this.emit('button:trackbw', msg.value)
+  }
+  if (msg.control === 59) {
+    return this.emit('button:trackfw', msg.value)
+  }
+  if (msg.control === 60) {
+    return this.emit('button:markset', msg.value)
+  }
+  if (msg.control === 61) {
+    return this.emit('button:markbw', msg.value)
+  }
+  if (msg.control === 62) {
+    return this.emit('button:markff', msg.value)
+  }
+
+
 }
 
 Korg.prototype.parseMessage = function(raw) {
